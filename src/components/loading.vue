@@ -13,10 +13,8 @@
 </template>
 <script>
 export default {
-  mounted() {
-  this.$nextTick(()=>{
-
-  })
+  created() {
+     this.$store.commit('getdata',this)
   },
 }
 </script>

@@ -7,9 +7,10 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import * as echarts from 'echarts'
 import $ from "jquery"
-Vue.prototype.$echarts = echarts
+import {myRequest} from "@/assets/js/api.js"
 import * as echartsGL from './assets/js/echarts-gl.min' // 引入echarts
-Vue.prototype.$echartsGL = echartsGL // 引入组件（将echarts注册为全局）
+
+
 Vue.config.productionTip = false
 
 Vue.use(ElementUI,$);
@@ -19,3 +20,6 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount('#app')
+Vue.prototype.$echartsGL = echartsGL // 引入组件（将echarts注册为全局）
+Vue.prototype.$myRequest = myRequest
+Vue.prototype.$echarts = echarts

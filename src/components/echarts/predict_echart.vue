@@ -1,5 +1,5 @@
 <template>
-   <div class="echart panel" ref="echartdiv">
+   <div class="echart panel">
           <slot></slot>
       
           <div class="panel-footer"></div>
@@ -7,21 +7,13 @@
 </template>
 <script>
 export default {
-  props:['height'],
-  mounted() {
-  
-    if(parseInt(this.height)>0){
-     
-        this.$refs.echartdiv.style.height=this.height+"vh"
-    }
-  },
   
 }
 </script>
 <style lang="scss" scoped>
 .echart{
   width: 100%;
-  height:44vh;
+  height:90vh;
   position: relative;
     border: 1px solid rgba(25, 186, 139, 0.17);
     background: rgba(255, 255, 255, 0.04) url("../../assets/images/line(1).png");

@@ -13,11 +13,40 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/china.vue'),
-    
+    children: [
+      {
+        path: "/china/index",
+        component: () =>import("../views/china/index.vue")
+      },
+      {
+        path: "/china/detailed",
+        component: () =>import("../views/china/detailed.vue")
+      },
+      {
+        path: "/china/predict",
+        component: () =>import("../views/china/predict.vue")
+      },
+    ]
   },
   {
-    path: "/china/detailed",
-    component: () =>import("../views/china/detailed.vue")
+    path: '/world',
+    name: 'world',
+    
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/world.vue'),
+    children: [
+      {
+        path: "/world/index",
+        component: () =>import("../views/world/index.vue")
+      },
+     
+      {
+        path: "/world/predict",
+        component: () =>import("../views/world/predict.vue")
+      },
+    ]
   },
   {
     path: '/loading',
@@ -27,7 +56,7 @@ const routes = [
   },
   {
     path: '/',
-    redirect:"/china",
+    redirect:"/loading",
     component: () => import(/* webpackChunkName: "about" */ '../views/china.vue')
   }
 ]

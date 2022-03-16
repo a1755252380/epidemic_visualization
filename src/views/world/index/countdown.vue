@@ -13,7 +13,8 @@
       <ul>
         <li>现有确诊</li>
         <li>累计确诊</li>
-       
+      
+         <li>累计治愈</li>  <li>累计死亡</li>
       </ul>
     </div>
   </div>
@@ -25,27 +26,26 @@ import    '@/assets/js/countUp'
 export default {
   data() {
     return {
-       num: [this.$store.state.nowconfirm, this.$store.state.sum_confirm],
-    
+      num: [this.$store.state.world_nowconfirm, 
+      this.$store.state.world_sum_confirm,
+      this.$store.state.world_sum_heal,
+      this.$store.state.world_sum_dead],
     
     }
   },
   mounted() {
-   
-    this.$forceUpdate()
-     this.num[0]=this.$store.state.nowconfirm, 
-    this.num[1]=this.$store.state.sum_confirm
-  setTimeout(() => {
-    
-    $('.timer').each(count); 
+   this.$nextTick(()=>{
+  $(window).ready(function () {
+            $('.timer').each(count); 
             function count(options) {
                 var $this = $(this);
                 options = $.extend({}, options || {}, $this.data('countToOptions') || {});
                 $this.countTo(options);
             }
             $(".math").removeClass("timer");
-  }, 1000);
+        })
 
+   })
   },
 }
 </script>

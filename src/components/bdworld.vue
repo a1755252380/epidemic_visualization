@@ -1,11 +1,10 @@
 <template>
 <header>
-  <div class="left_btn" >
-    <btnvue :url="'/china/index'" :name="'国内概况'"></btnvue>
-    <btnvue :url="'/china/detailed'" :name="'详细信息'"></btnvue>
-    <btnvue :url="'/china/predict'" :name="'预测实情'"></btnvue>
+ 
+   <div class="left_btn">
+    <btnvue :url="'/world/index'" :name="'国际概况'"></btnvue>
+    <btnvue :url="'/world/predict'" :name="'预测实情'"></btnvue>
   </div>
-   
   <h1>疫情可视化平台</h1>
   <div class="right_btn">
     <div @click="click(1)">

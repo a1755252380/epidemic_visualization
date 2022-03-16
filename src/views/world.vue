@@ -1,19 +1,14 @@
 <template>
   <div style="width:100%;height:100%">
-    <backgroundVue></backgroundVue>
+    <backgroundCopyVue></backgroundCopyVue>
     <router-view></router-view>
   </div>
 </template>
 <script>
-import backgroundVue from '@/components/background.vue'
+import backgroundCopyVue from '../components/bdworld.vue'
 
 export default {
-  components:{
-    backgroundVue
-  },
-  mounted() {
-   
-  },
+  components:{backgroundCopyVue}
 }
 </script>
 <style lang="scss" scoped>
