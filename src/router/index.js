@@ -1,8 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
+import store from '../store/index'
 Vue.use(VueRouter)
-
 const routes = [
   
   {
@@ -66,5 +65,14 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
-
+router.beforeEach((to, from,next) => {
+  if (store.state.isLogin == true || to == "/loading") {
+    next()
+  } else { 
+    // alert("先读取数据！！")
+    store.state.isLogin = true
+    next("/loading")
+    return true
+  }
+})
 export default router

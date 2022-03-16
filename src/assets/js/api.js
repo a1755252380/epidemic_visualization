@@ -7,7 +7,9 @@ const myRequest = (options) =>{
 			method:options.method || 'POST',
 			data:options.data || {},
 		
-    }).then((res) => {resolve(res) })
+    }).then((res) => {
+      resolve(res)
+    })
 	})
 }
 

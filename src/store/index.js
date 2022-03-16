@@ -5,6 +5,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+
+    isLogin:false,
       //控制是否等待
     loading:false,
     //总数
