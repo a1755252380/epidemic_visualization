@@ -105,13 +105,13 @@ setTimeout(() => {
       };
     },
   },
-  computed: {
-    option: {
+  computed: {//计算属性   实时监听传递的option配置项信息
+    option: {//动态option配置项
       get() {
         return this.optiondata;
       },
     },
-    divid: {
+    divid: {//使用自定义id  防止id冲突导致无法渲染
       get() {
         return this.id;
       },

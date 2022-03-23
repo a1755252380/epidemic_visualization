@@ -284,7 +284,7 @@ export default {
 											value=0
 										}
 									
-										return params.name + ' : ' + value;
+										return params.name + '<br>现有确诊人数: ' + value;
 									},
 								},
 								//左侧小导航图标

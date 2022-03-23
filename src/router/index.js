@@ -65,10 +65,15 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+
+//路由守卫  强制先获取数据
 router.beforeEach((to, from,next) => {
   if (store.state.isLogin == true || to == "/loading") {
+    //判断是否已经获取过数据，数据获取则进入下一页面
     next()
   } else { 
+    //无获取数据则先跳转loading页面进行数据获取
     // alert("先读取数据！！")
     store.state.isLogin = true
     next("/loading")

@@ -29,7 +29,7 @@
     </el-col>
     <el-col :xs="24" :sm="24" :md="24" :lg="8" :xl="8">
      <topdivVue >
-        <lineVue :optiondata="bar" :id="'line5'" :title="'国内疫情累计概况'"></lineVue>
+        <lineVue :optiondata="bar" :id="'line5'" :title="'世界各国疫情数据对比'"></lineVue>
       </topdivVue>
     </el-col>
     
@@ -199,7 +199,8 @@ export default {
       label: {
         backgroundColor: '#6a7985'
       }
-    }
+    },
+ valueFormatter: (value) =>value+"%"
   },
 dataZoom: [{
           bottom: "3%",
@@ -211,7 +212,14 @@ dataZoom: [{
         }],
   // toolbox: {
   //   feature: {
-  //     saveAsImage: {}
+  //     saveAsImage: {},
+  //      dataView:{
+        
+
+  //      },
+  //      magicType: {
+  //       type: ['line', 'bar']
+  //   }
   //   }
   // },
   grid: {
@@ -304,7 +312,8 @@ dataZoom: [{
       label: {
         backgroundColor: '#6a7985'
       }
-    }
+    },
+   valueFormatter: (value) =>value+"%"
   },
 dataZoom: [{
           bottom: "3%",
@@ -763,6 +772,13 @@ cicle: {
             data: this.$store.state.worldtop.dead,
         },
     ],
+},
+
+
+//数据视图数据
+view:{
+  name:"",
+  data:[]
 }
 
     
