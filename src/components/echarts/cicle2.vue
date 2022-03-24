@@ -6,13 +6,13 @@
       <el-tooltip content="全屏显示" placement="bottom">
         <el-button @click="bigshow"><i class="el-icon-full-screen"></i></el-button>
       </el-tooltip>
-      <el-tooltip content="保存成图片" placement="bottom">
+   <el-tooltip content="保存成图片" placement="bottom">
         <el-button @click="downloadpicture"><i class="el-icon-download"></i></el-button>
       </el-tooltip>
        <!-- 数据视图  目前只支持折线图 -->
-      <el-tooltip content="数据展示" placement="bottom">
+      <!-- <el-tooltip content="数据展示" placement="bottom">
         <el-button @click="datashow"><i class="el-icon-document"></i></el-button>
-      </el-tooltip>
+      </el-tooltip> -->
     </div>
   </div>
   <div :id="divid" :style="{ width: width + 'px', height: height + 'px' }"></div>
@@ -26,7 +26,7 @@
   </el-dialog>
 
   <!-- 数据视图  目前只支持折线图 -->
-    <el-dialog :visible.sync="datashowdiv" width="60%" center class="dialog " :title="this.title">
+    <!-- <el-dialog :visible.sync="datashowdiv" width="60%" center class="dialog " :title="this.title">
     <div style="width:100%;height:70vh" class="panel " ref="bigshow">
         <div class="panel-footer"></div>
        <el-table
@@ -51,7 +51,7 @@
   </el-table>
     </div>
     
-  </el-dialog>
+  </el-dialog> -->
 </div>
 </template>
 
@@ -86,6 +86,38 @@ export default {
     });
   },
   methods: {
+    //下载成图片
+     downloadpicture(){
+     let str= this.echart.getDataURL({
+            pixelRatio: 2,
+            backgroundColor: 'rgb(21, 38, 90)'
+        });
+        this.downloadFile(str,this.divid)
+    },
+    //下载base64图片
+    downloadFile(content, fileName) { //下载base64图片
+    var base64ToBlob = function(code) {
+        let parts = code.split(';base64,');
+        let contentType = parts[0].split(':')[1];
+        let raw = window.atob(parts[1]);
+        let rawLength = raw.length;
+        let uInt8Array = new Uint8Array(rawLength);
+        for(let i = 0; i < rawLength; ++i) {
+            uInt8Array[i] = raw.charCodeAt(i);
+        }
+        return new Blob([uInt8Array], {
+            type: contentType
+        });
+    };
+    let aLink = document.createElement('a');
+    let blob = base64ToBlob(content); //new Blob([content]);
+    let evt = document.createEvent("HTMLEvents");
+    evt.initEvent("click", true, true); //initEvent 不加后两个参数在FF下会报错  事件类型，是否冒泡，是否阻止浏览器的默认行为
+    aLink.download = fileName;
+    aLink.href = URL.createObjectURL(blob);
+    aLink.click();
+},
+
     //全屏显示
     bigshow(id) {
     
@@ -110,7 +142,6 @@ setTimeout(() => {
      
       }
     },
-    //数据视图
     datashow(){
       console.log(this.echart._model.option)
       //获取x轴数据
@@ -162,36 +193,7 @@ setTimeout(() => {
     
    
     },
-    downloadpicture(){
-     let str= this.echart.getDataURL({
-            pixelRatio: 2,
-            backgroundColor: 'rgb(21, 38, 90)'
-        });
-        this.downloadFile(str,this.divid)
-    },
-    //下载base64图片
-    downloadFile(content, fileName) { //下载base64图片
-    var base64ToBlob = function(code) {
-        let parts = code.split(';base64,');
-        let contentType = parts[0].split(':')[1];
-        let raw = window.atob(parts[1]);
-        let rawLength = raw.length;
-        let uInt8Array = new Uint8Array(rawLength);
-        for(let i = 0; i < rawLength; ++i) {
-            uInt8Array[i] = raw.charCodeAt(i);
-        }
-        return new Blob([uInt8Array], {
-            type: contentType
-        });
-    };
-    let aLink = document.createElement('a');
-    let blob = base64ToBlob(content); //new Blob([content]);
-    let evt = document.createEvent("HTMLEvents");
-    evt.initEvent("click", true, true); //initEvent 不加后两个参数在FF下会报错  事件类型，是否冒泡，是否阻止浏览器的默认行为
-    aLink.download = fileName;
-    aLink.href = URL.createObjectURL(blob);
-    aLink.click();
-},
+
     //
     createechart(id) {
       // 基于准备好的dom，初始化echarts实例

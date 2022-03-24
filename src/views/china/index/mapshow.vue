@@ -1,7 +1,7 @@
 <template>
   <div class="map">
       <chinabackgroundVue></chinabackgroundVue>
-      <mapVue></mapVue>
+      <mapVue :tablechoose="tablechoose"></mapVue>
   </div>
 </template>
 <script>
@@ -12,6 +12,14 @@ export default {
    components:{
       chinabackgroundVue,
       mapVue
+    },
+    props:['tableclickdata'],
+    computed:{
+      tablechoose:{
+        get(){
+          return this.tableclickdata
+        }
+      }
     }
 }
 </script>

@@ -11,14 +11,14 @@
     </el-col>
     <el-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
       <countdownVue></countdownVue>
-      <mapshow></mapshow>
+      <mapshow :tableclickdata="tableclickdata"></mapshow>
     </el-col>
     <el-col :xs="24" :sm="24" :md="24" :lg="6" :xl="6">
       <echartdivVue>
         <cicleVue :cicledata="cicle" :id="'cicle'" :title="'疫情数据占比'"></cicleVue>
       </echartdivVue>
       <echartdivVue style="margin-top: 0.1875rem">
-        <introductionVue></introductionVue>
+        <introductionVue @tableclick="tableclick"></introductionVue>
       </echartdivVue>
     </el-col>
   </el-row>
@@ -413,11 +413,20 @@ export default {
 
       //地图
       mapdata: {},
+
+      tableclickdata:"",
     };
   },
   created() {},
   mounted() {
     console.log(this.line1);
+  },
+  methods: {
+    //接收列表点击返回的地区
+    tableclick(data){
+      console.log(data.province)
+      this.tableclickdata=data.province
+    }
   },
 };
 </script>

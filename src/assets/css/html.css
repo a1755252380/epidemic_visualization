@@ -5,6 +5,9 @@
   padding: 0;
  
 }
+a{
+  text-decoration: none;
+}
 .echarts_title{
   height: 20px;
   font-size: 14px;

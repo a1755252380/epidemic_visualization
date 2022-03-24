@@ -17,7 +17,7 @@
        <el-row :gutter="10">
         <el-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
            <echartdivVue style="margin-top:1vh">
-        <lineVue :optiondata="cicle" :id="'cicle'" :title="'国内疫情现有确诊人数对比'"></lineVue>
+        <cicle2Vue :optiondata="cicle" :id="'cicle'" :title="'国内疫情现有确诊人数对比'"></cicle2Vue>
       </echartdivVue>
         </el-col>
          <el-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
@@ -29,7 +29,7 @@
     </el-col>
     <el-col :xs="24" :sm="24" :md="24" :lg="8" :xl="8">
      <topdivVue >
-        <lineVue :optiondata="bar" :id="'line5'" :title="'世界各国疫情数据对比'"></lineVue>
+        <barVue :optiondata="bar" :id="'bar1'" :title="'世界各国疫情数据对比'"></barVue>
       </topdivVue>
     </el-col>
     
@@ -42,12 +42,16 @@
 import echartdivVue from '@/components/echarts/echart_div.vue'
 import lineVue from '@/components/echarts/line.vue'
 import topdivVue from './detailed/top_div.vue'
+import cicle2Vue from '../../components/echarts/cicle2.vue'
+import barVue from '../../components/echarts/bar.vue'
+
 export default {
   components: {
     echartdivVue,
     lineVue,
-    topdivVue
-
+    topdivVue,
+cicle2Vue,
+barVue
   },
   data() {
     return {
@@ -214,8 +218,7 @@ dataZoom: [{
   //   feature: {
   //     saveAsImage: {},
   //      dataView:{
-        
-
+       
   //      },
   //      magicType: {
   //       type: ['line', 'bar']

@@ -17,7 +17,7 @@
           <el-col :xs="4" :sm="4" :md="4" :lg="4" :xl="4">{{item. city}}</el-col>
           <el-col :xs="3" :sm="3" :md="3" :lg="3" :xl="3">{{item. confirmAdd}}</el-col>
           <el-col :xs="3" :sm="3" :md="3" :lg="3" :xl="3">{{item. nowConfirm}}</el-col>
-          <el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6">{{item. grade}}</el-col>
+          <el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6"><a href="JavaScript:void(0);"  @click="click(index)">{{item. grade}}</a></el-col>
           <el-col :xs="5" :sm="5" :md="5" :lg="5" :xl="5">{{item. date}}</el-col>
         </el-row>
       </div>
@@ -39,7 +39,8 @@ export default {
     return {
       width: 0,
       height: 0,
-      tabledata:  this.$store.state.tabledata
+      tabledata:  this.$store.state.tabledata,
+      swiper:null
     }
   },
   mounted() {
@@ -47,11 +48,12 @@ export default {
     this.width = this.$refs.introduction.offsetWidth - 10
     this.height = this.$refs.introduction.offsetHeight - 30
     Swiper.use([Autoplay, Navigation, Pagination]);
+    let that=this
     this.$nextTick(() => {
       //实现按钮点击切换以及轮播的效果
 
      setTimeout(() => {
-        new Swiper('#rotation', {
+        that.swiper=new Swiper('#rotation', {
         direction: "vertical",
         loop: true,
         slidesPerView:5,
@@ -64,11 +66,23 @@ export default {
           disableOnInteraction: false,
 
         },
-
+       
       });
+        that.swiper.el.onmouseover = function(){ //鼠标放上暂停轮播
+        that.swiper.autoplay.stop();
+    }
+      that.swiper.el.onmouseleave = function(){
+        that.swiper.autoplay.start();
+    }
+
      }, 500);
     })
 
+  },
+  methods: {
+    click(index){
+      this.$emit("tableclick",this.tabledata[index])
+    }
   },
   watch:{
     tabledata(newval,oldval){

@@ -1,7 +1,7 @@
 <template>
 <div class="about" ref="mapdiv">
   <div @click="comechina" v-show="btnshow">
-    <btnvue :name="'←'" :url="'#'" class="come_btn"></btnvue>
+    <btnvue :name="'←'" :url="''" class="come_btn"></btnvue>
   </div>
 
   <div id="map" class="main" :style="{width:width+'px',height:height+'px'}"></div>
@@ -15,6 +15,13 @@ import btnvue from "@/components/btn/btn.vue"
 import axios from "axios"
 
 export default {
+  props:['tablechoose'],
+  watch:{
+    tablechoose(newvalue,oldvalue){
+      this.pro=this.pyChinese(newvalue)
+      this.createprovins()
+    }
+  },
   data() {
     return {
       count: 0,
@@ -46,6 +53,7 @@ export default {
     /**省份地图 */
     createprovins() {
       let that = this
+        that.btnshow = true
       var option = {
         tooltip: {
           show: true,
@@ -294,7 +302,7 @@ export default {
         that.pro = that.pyChinese(parm.name)
         console.log(that.pro)
         that.myChart.clear()
-        that.btnshow = true
+      
         that.createprovins();
 
       });
